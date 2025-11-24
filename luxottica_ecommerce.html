@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxottica - Premium Eyewear Collection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: #4ecca3;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=1600&h=600&fit=crop') center/cover;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #4ecca3;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background: #45b393;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(78, 204, 163, 0.4);
+        }
+
+        .section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1a1a2e;
+        }
+
+        .ai-search-container {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            position: relative;
+        }
+
+        .ai-search-box {
+            display: flex;
+            gap: 1rem;
+            background: white;
+            padding: 1rem;
+            border-radius: 50px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.15);
+            border: 2px solid #4ecca3;
+        }
+
+        .ai-search-input {
+            flex: 1;
+            border: none;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            outline: none;
+        }
+
+        .ai-search-btn {
+            background: linear-gradient(135deg, #4ecca3 0%, #3ab88f 100%);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .ai-search-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 15px rgba(78, 204, 163, 0.4);
+        }
+
+        .ai-suggestions {
+            margin-top: 1rem;
+            text-align: center;
+            color: #666;
+        }
+
+        .ai-suggestion-chip {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0.3rem;
+            background: #f0f0f0;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .ai-suggestion-chip:hover {
+            background: #4ecca3;
+            color: white;
+        }
+
+        .search-results {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 0.7rem 1.5rem;
+            background: white;
+            border: 2px solid #4ecca3;
+            color: #1a1a2e;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #4ecca3;
+            color: white;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .brand-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: #4ecca3;
+            color: white;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #1a1a2e;
+        }
+
+        .product-type {
+            color: #666;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: #4ecca3;
+            font-weight: bold;
+        }
+
+        .prescription-form {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+        }
+
+        .form-section h3 {
+            color: #1a1a2e;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #4ecca3;
+        }
+
+        .lens-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .lens-option {
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .lens-option:hover, .lens-option.selected {
+            border-color: #4ecca3;
+            background: #f0fff9;
+        }
+
+        .store-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .store-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .store-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .store-card h3 {
+            color: #1a1a2e;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .store-info {
+            color: #666;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        footer {
+            background: #1a1a2e;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .product-grid, .store-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ai-search-box {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo" onclick="showPage('home')">LUXOTTICA</div>
+            <nav>
+                <ul>
+                    <li><a onclick="showPage('catalog')">Catalog</a></li>
+                    <li><a onclick="showPage('services')">Services</a></li>
+                    <li><a onclick="showPage('stores')">Store Locator</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>See The World Differently</h1>
+                <p>Premium Eyewear from World's Leading Brands</p>
+                <button class="btn" onclick="showPage('catalog')">Shop Now</button>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Why Choose Luxottica?</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <div style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">👓</div>
+                    <h3 style="margin-bottom: 1rem; color: #1a1a2e;">Premium Brands</h3>
+                    <p style="color: #666;">Ray-Ban, Oakley, Prada, Versace and more</p>
+                </div>
+                <div style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
+                    <h3 style="margin-bottom: 1rem; color: #1a1a2e;">AI-Powered Search</h3>
+                    <p style="color: #666;">Find your perfect frames with intelligent search</p>
+                </div>
+                <div style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">👁️</div>
+                    <h3 style="margin-bottom: 1rem; color: #1a1a2e;">Expert Eye Care</h3>
+                    <p style="color: #666;">Professional examinations and prescriptions</p>
+                </div>
+                <div style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📍</div>
+                    <h3 style="margin-bottom: 1rem; color: #1a1a2e;">Nationwide Stores</h3>
+                    <p style="color: #666;">Find a location near you</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- CATALOG PAGE -->
+    <div id="catalog" class="page">
+        <section class="section">
+            <h2 class="section-title">Our Collection</h2>
+            
+            <!-- AI Search -->
+            <div class="ai-search-container">
+                <div class="ai-search-box">
+                    <input type="text" class="ai-search-input" id="aiSearchInput" placeholder="🤖 Ask AI: 'Show me trendy sunglasses for outdoor sports' or 'Find elegant frames for seniors'">
+                    <button class="ai-search-btn" onclick="performAISearch()">Search</button>
+                </div>
+                <div class="ai-suggestions">
+                    <div class="ai-suggestion-chip" onclick="quickSearch('sports sunglasses for running')">Sports sunglasses for running</div>
+                    <div class="ai-suggestion-chip" onclick="quickSearch('elegant frames for office')">Elegant frames for office</div>
+                    <div class="ai-suggestion-chip" onclick="quickSearch('trendy youth styles')">Trendy youth styles</div>
+                    <div class="ai-suggestion-chip" onclick="quickSearch('comfortable senior frames')">Comfortable senior frames</div>
+                </div>
+            </div>
+
+            <!-- AI Search Results -->
+            <div class="search-results" id="searchResults">
+                <h3 style="color: #1a1a2e; margin-bottom: 1rem;">🤖 AI Search Results</h3>
+                <p id="searchResultText" style="color: #666;"></p>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="sports">Sports</button>
+                <button class="filter-btn" data-filter="casual">Casual</button>
+                <button class="filter-btn" data-filter="senior">Senior</button>
+                <button class="filter-btn" data-filter="youth">Youth</button>
+                <button class="filter-btn" data-filter="trendy">Trendy</button>
+                <button class="filter-btn" data-filter="elegant">Elegant</button>
+            </div>
+
+            <div class="product-grid" id="productGrid"></div>
+        </section>
+    </div>
+
+    <!-- SERVICES PAGE (Prescription + Eye Exam) -->
+    <div id="services" class="page">
+        <section class="section">
+            <h2 class="section-title">Prescription & Eye Care Services</h2>
+            
+            <div class="prescription-form">
+                <!-- Prescription Section -->
+                <div class="form-section">
+                    <h3>📋 Prescription Services</h3>
+                    
+                    <div class="form-group">
+                        <label>Select Your Frame</label>
+                        <select id="frameSelect">
+                            <option>Ray-Ban Aviator Classic - $189</option>
+                            <option>Oakley Holbrook Sport - $220</option>
+                            <option>Prada PR 01VS Elegant - $399</option>
+                            <option>Versace VE2150Q Trendy - $349</option>
+                            <option>Persol PO3019S Senior - $289</option>
+                            <option>Burberry BE4216 Elegant - $329</option>
+                        </select>
+                    </div>
+
+                    <h4 style="margin: 2rem 0 1rem; color: #1a1a2e;">Lens Type</h4>
+                    <div class="lens-options">
+                        <div class="lens-option" data-lens="single">
+                            <h4>Single Vision</h4>
+                            <p>For distance or reading</p>
+                            <p><strong>+$50</strong></p>
+                        </div>
+                        <div class="lens-option" data-lens="progressive">
+                            <h4>Progressive</h4>
+                            <p>Multifocal lenses</p>
+                            <p><strong>+$200</strong></p>
+                        </div>
+                        <div class="lens-option" data-lens="bifocal">
+                            <h4>Bifocal</h4>
+                            <p>Two distinct zones</p>
+                            <p><strong>+$150</strong></p>
+                        </div>
+                    </div>
+
+                    <h4 style="margin: 2rem 0 1rem; color: #1a1a2e;">Lens Enhancements</h4>
+                    <div class="lens-options">
+                        <div class="lens-option" data-lens="blue">
+                            <h4>Blue Light Filter</h4>
+                            <p>Screen protection</p>
+                            <p><strong>+$75</strong></p>
+                        </div>
+                        <div class="lens-option" data-lens="transition">
+                            <h4>Transitions</h4>
+                            <p>Adaptive tinting</p>
+                            <p><strong>+$125</strong></p>
+                        </div>
+                        <div class="lens-option" data-lens="polarized">
+                            <h4>Polarized</h4>
+                            <p>Glare reduction</p>
+                            <p><strong>+$100</strong></p>
+                        </div>
+                        <div class="lens-option" data-lens="antiglare">
+                            <h4>Anti-Glare</h4>
+                            <p>Enhanced clarity</p>
+                            <p><strong>+$60</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 2rem;">
+                        <label>Prescription Details (Optional - Upload or Enter Later)</label>
+                        <textarea rows="4" placeholder="Enter your prescription details or upload during checkout"></textarea>
+                    </div>
+
+                    <button class="btn" style="width: 100%; margin-top: 1rem;">Add to Cart</button>
+                </div>
+
+                <!-- Eye Exam Section -->
+                <div class="form-section">
+                    <h3>👁️ Schedule Your Eye Exam</h3>
+                    
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" placeholder="John Doe">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="john@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" placeholder="(555) 123-4567">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Preferred Store Location</label>
+                        <select>
+                            <option>Luxottica Downtown - New York, NY</option>
+                            <option>Luxottica Westfield Mall - Los Angeles, CA</option>
+                            <option>Luxottica Magnificent Mile - Chicago, IL</option>
+                            <option>Luxottica Waterfront - Miami, FL</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Preferred Date</label>
+                        <input type="date">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Preferred Time</label>
+                        <select>
+                            <option>9:00 AM</option>
+                            <option>10:00 AM</option>
+                            <option>11:00 AM</option>
+                            <option>12:00 PM</option>
+                            <option>1:00 PM</option>
+                            <option>2:00 PM</option>
+                            <option>3:00 PM</option>
+                            <option>4:00 PM</option>
+                            <option>5:00 PM</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Insurance Provider (Optional)</label>
+                        <input type="text" placeholder="Enter your insurance provider">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Additional Notes</label>
+                        <textarea rows="3" placeholder="Any specific concerns or requirements?"></textarea>
+                    </div>
+
+                    <button class="btn" style="width: 100%;">Request Appointment</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- STORE LOCATOR PAGE -->
+    <div id="stores" class="page">
+        <section class="section">
+            <h2 class="section-title">Find a Store Near You</h2>
+            
+            <div class="form-group" style="max-width: 600px; margin: 0 auto 3rem;">
+                <input type="text" id="locationSearch" placeholder="Enter your city or zip code" style="padding: 1.2rem; font-size: 1.1rem;">
+                <button class="btn" style="margin-top: 1rem; width: 100%;">Search Locations</button>
+            </div>
+
+            <div class="store-grid">
+                <div class="store-card">
+                    <h3>Luxottica Downtown</h3>
+                    <p class="store-info">📍 123 Main Street, New York, NY 10001</p>
+                    <p class="store-info">📞 (212) 555-0100</p>
+                    <p class="store-info">📧 downtown@luxottica.com</p>
+                    <p class="store-info">🕐 Mon-Sat: 9AM-8PM, Sun: 10AM-6PM</p>
+                    <button class="btn" style="margin-top: 1rem; width: 100%;">Get Directions</button>
+                </div>
+
+                <div class="store-card">
+                    <h3>Luxottica Westfield Mall</h3>
+                    <p class="store-info">📍 456 Shopping Plaza, Los Angeles, CA 90012</p>
+                    <p class="store-info">📞 (323) 555-0200</p>
+                    <p class="store-info">📧 westfield@luxottica.com</p>
+                    <p class="store-info">🕐 Mon-Sat: 10AM-9PM, Sun: 11AM-7PM</p>
+                    <button class="btn" style="margin-top: 1rem; width: 100%;">Get Directions</button>
+                </div>
+
+                <div class="store-card">
+                    <h3>Luxottica Magnificent Mile</h3>
+                    <p class="store-info">📍 789 Michigan Ave, Chicago, IL 60611</p>
+                    <p class="store-info">📞 (312) 555-0300</p>
+                    <p class="store-info">📧 chicago@luxottica.com</p>
+                    <p class="store-info">🕐 Mon-Sat: 9AM-8PM, Sun: 10AM-6PM</p>
+                    <button class="btn" style="margin-top: 1rem; width: 100%;">Get Directions</button>
+                </div>
+
+                <div class="store-card">
+                    <h3>Luxottica Waterfront</h3>
+                    <p class="store-info">📍 321 Beach Blvd, Miami, FL 33139</p>
+                    <p class="store-info">📞 (305) 555-0400</p>
+                    <p class="store-info">📧 miami@luxottica.com</p>
+                    <p class="store-info">🕐 Mon-Sat: 10AM-9PM, Sun: 11AM-7PM</p>
+                    <button class="btn" style="margin-top: 1rem; width: 100%;">Get Directions</button>
+                </div>
+
+                <div class="store-card">
+                    <h3>Luxottica Boston Commons</h3>
+                    <p class="store-info">📍 555 Boylston Street, Boston, MA 02116</p>
+                    <p class="store-info">📞 (617) 555-0500</p>
+                    <p class="store-info">📧 boston@luxottica.com</p>
+                    <p class="store-info">🕐 Mon-Sat: 9AM-7PM, Sun: 10AM-6PM</p>
+                    <button class="btn" style="margin-top: 1rem; width: 100%;">Get Directions</button>
+                </div>
+
+                <div class="store-card">
+                    <h3>Luxottica Seattle Center</h3>
+                    <p class="store-info">📍 888 Pike Street, Seattle, WA 98101</p>
+                    <p class="store-info">📞 (206) 555-0600</p>
+                    <p class="store-info">📧 seattle@luxottica.com</p>
+                    <p class="store-info">🕐 Mon-Sat: 10AM-8PM, Sun: 11AM-6PM</p>
+                    <button class="btn" style="margin-top: 1rem; width: 100%;">Get Directions</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Luxottica Group. All rights reserved.</p>
+        <p>Premium Eyewear | Designer Brands | Professional Eye Care</p>
+    </footer>
+
+    <script>
+        const products = [
+            {
+                brand: 'Ray-Ban',
+                title: 'Aviator Classic',
+                type: 'casual',
+                price: 189,
+                image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400&h=300&fit=crop',
+                keywords: 'casual everyday classic metal'
+            },
+            {
+                brand: 'Oakley',
+                title: 'Holbrook Sport',
+                type: 'sports',
+                price: 220,
+                image: 'https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=400&h=300&fit=crop',
+                keywords: 'sports athletic running cycling outdoor'
+            },
+            {
+                brand: 'Prada',
+                title: 'PR 01VS Elegant',
+                type: 'elegant',
+                price: 399,
+                image: 'https://images.unsplash.com/photo-1577803645773-f96470509666?w=400&h=300&fit=crop',
+                keywords: 'elegant luxury office formal professional'
+            },
+            {
+                brand: 'Versace',
+                title: 'VE2150Q Trendy',
+                type: 'trendy',
+                price: 349,
+                image: 'https://images.unsplash.com/photo-1508296695146-257a814070b4?w=400&h=300&fit=crop',
+                keywords: 'trendy fashion modern stylish designer'
+            },
+            {
+                brand: 'Ray-Ban',
+                title: 'Round Metal Youth',
+                type: 'youth',
+                price: 169,
+                image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=300&fit=crop',
+                keywords: 'youth young teen student casual'
+            },
+            {
+                brand: 'Oakley',
+                title: 'Flak 2.0 XL Sports',
+                type: 'sports',
+                price: 249,
+                image: 'https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=400&h=300&fit=crop',
+                keywords: 'sports performance running cycling golf'
+            },
+            {
+                brand: 'Persol',
+                title: 'PO3019S Senior Comfort',
+                type: 'senior',
+                price: 289,
+                image: 'https://images.unsplash.com/photo-1609081219090-a6d81d3085bf?w=400&h=300&fit=crop',
+                keywords: 'senior comfortable classic mature sophisticated'
+            },
+            {
+                brand: 'Burberry',
+                title: 'BE4216 Elegant',
+                type: 'elegant',
+                price: 329,
+                image: 'https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=400&h=300&fit=crop',
+                keywords: 'elegant luxury business formal sophisticated'
+            },
+            {
+                brand: 'Arnette',
+                title: 'AN4143 Casual Street',
+                type: 'casual',
+                price: 129,
+                image: 'https://images.unsplash.com/photo-1513094735237-8f2714d57c13?w=400&h=300&fit=crop',
+                keywords: 'casual street urban everyday affordable'
+            },
+            {
+                brand: 'Dolce & Gabbana',
+                title: 'DG4319 Trendy',
+                type: 'trendy',
+                price: 379,
+                image: 'https://images.unsplash.com/photo-1475180098004-ca77a66827be?w=400&h=300&fit=crop',
+                keywords: 'trendy fashion designer stylish premium'
+            },
+            {
+                brand: 'Coach',
+                title: 'HC8232 Youth Style',
+                type: 'youth',
+                price: 159,
+                image: 'https://images.unsplash.com/photo-1559935943-78f94f80cf24?w=400&h=300&fit=crop',
+                keywords: 'youth young modern student teen'
+            },
+            {
+                brand: 'Oakley',
+                title: 'Radar EV Sports Pro',
+                type: 'sports',
+                price: 279,
+                image: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400&h=300&fit=crop',
+                keywords: 'sports professional athlete running cycling'
+            }
+        ];
+
+        // Page Navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // AI Search Functionality
+        function performAISearch() {
+            const query = document.getElementById('aiSearchInput').value.toLowerCase();
+            const resultsDiv = document.getElementById('searchResults');
+            const resultText = document.getElementById('searchResultText');
+
+            if (!query) {
+                alert('Please enter a search query');
+                return;
+            }
+
+            // Dummy AI search logic
+            let matchedProducts = products.filter(product => {
+                const searchableText = `${product.brand} ${product.title} ${product.type} ${product.keywords}`.toLowerCase();
+                const queryWords = query.split(' ');
+                return queryWords.some(word => searchableText.includes(word));
+            });
+
+            // If no direct match, use type-based matching
+            if (matchedProducts.length === 0) {
+                const types = ['sports', 'casual', 'senior', 'youth', 'trendy', 'elegant'];
+                const matchedType = types.find(type => query.includes(type));
+                if (matchedType) {
+                    matchedProducts = products.filter(p => p.type === matchedType);
+                }
+            }
+
+            // Show AI response
+            resultsDiv.classList.add('active');
+            if (matchedProducts.length > 0) {
+                resultText.innerHTML = `I found <strong>${matchedProducts.length} products</strong> matching "${query}". These frames are perfect for your needs based on style, comfort, and functionality. Check out the results below!`;
+                renderProducts('ai-search', matchedProducts);
+            } else {
+                resultText.innerHTML = `I couldn't find exact matches for "${query}", but here are our most popular frames that might interest you.`;
+                renderProducts('all');
+            }
+
+            // Clear active filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        }
+
+        function quickSearch(query) {
+            document.getElementById('aiSearchInput').value = query;
+            performAISearch();
+        }
+
+        // Product Rendering
+        function renderProducts(filter = 'all', customProducts = null) {
+            const grid = document.getElementById('productGrid');
+            let productsToShow = customProducts || (filter === 'all' ? products : products.filter(p => p.type === filter));
+            
+            grid.innerHTML = productsToShow.map(product => `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.title}" class="product-image">
+                    <div class="product-info">
+                        <span class="brand-badge">${product.brand}</span>
+                        <h3 class="product-title">${product.title}</h3>
+                        <p class="product-type">${product.type.charAt(0).toUpperCase() + product.type.slice(1)}</p>
+                        <p class="product-price">${product.price}</p>
+                        <button class="btn" style="width: 100%; margin-top: 1rem;">Add to Cart</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    document.getElementById('searchResults').classList.remove('active');
+                    renderProducts(this.dataset.filter);
+                });
+            });
+
+            // Lens options selection
+            document.querySelectorAll('.lens-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    this.classList.toggle('selected');
+                });
+            });
+
+            // Enter key for AI search
+            document.getElementById('aiSearchInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performAISearch();
+                }
+            });
+
+            // Initialize products on catalog page
+            renderProducts();
+        });
+    </script>
+</body>
+</html>
