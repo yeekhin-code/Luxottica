@@ -48,6 +48,7 @@
             display: flex;
             list-style: none;
             gap: 2rem;
+            align-items: center;
         }
 
         nav a {
@@ -60,6 +61,28 @@
 
         nav a:hover {
             color: #4ecca3;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #4ecca3;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
         }
 
         .page {
@@ -389,6 +412,376 @@
             margin-top: 4rem;
         }
 
+        .cart-sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100%;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            transition: right 0.3s;
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            background: #1a1a2e;
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-cart {
+            font-size: 1.5rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: white;
+        }
+
+        .cart-items {
+            padding: 1rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-total {
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .loyalty-banner {
+            background: linear-gradient(135deg, #4ecca3 0%, #3ab88f 100%);
+            color: white;
+            padding: 1rem;
+            margin: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .recommendation-section {
+            background: #f8f9fa;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 15px;
+        }
+
+        .recommendation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .recommendation-card {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .recommendation-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .close-modal {
+            font-size: 1.8rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: #666;
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .auth-tab {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .auth-tab.active {
+            color: #4ecca3;
+            border-bottom-color: #4ecca3;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .user-menu {
+            position: relative;
+        }
+
+        .user-icon {
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .member-badge {
+            background: gold;
+            color: #1a1a2e;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-left: 0.3rem;
+        }
+
+        .admin-panel {
+            background: #f8f9fa;
+            min-height: 80vh;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .admin-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .admin-nav-btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            background: #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .admin-nav-btn.active {
+            background: #4ecca3;
+            color: white;
+        }
+
+        .admin-content {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .dashboard-card h3 {
+            color: #1a1a2e;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #4ecca3;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f8f9fa;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: #1a1a2e;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-low {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-in-stock {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .btn-edit {
+            background: #4ecca3;
+            color: white;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-add {
+            background: #4ecca3;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .role-badge {
+            background: linear-gradient(135deg, #4ecca3 0%, #3ab88f 100%);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
         @media (max-width: 768px) {
             nav ul {
                 flex-direction: column;
@@ -418,10 +811,136 @@
                     <li><a onclick="showPage('catalog')">Catalog</a></li>
                     <li><a onclick="showPage('services')">Services</a></li>
                     <li><a onclick="showPage('stores')">Store Locator</a></li>
+                    <li class="user-menu">
+                        <span class="user-icon" onclick="openAuthModal()" id="userIcon">👤</span>
+                    </li>
+                    <li id="adminLink" style="display: none;">
+                        <a onclick="showPage('admin')">Admin</a>
+                    </li>
+                    <li>
+                        <div class="cart-icon" onclick="toggleCart()">
+                            🛒
+                            <span class="cart-count" id="cartCount">0</span>
+                        </div>
+                    </li>
                 </ul>
             </nav>
         </div>
     </header>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart" onclick="toggleCart()">✕</button>
+        </div>
+        
+        <div class="loyalty-banner">
+            <h3>💎 Loyalty Rewards</h3>
+            <p><strong>Points: <span id="loyaltyPoints">500</span></strong></p>
+            <p style="font-size: 0.9rem;">Spend $1 = Earn 10 points | 1000 points = $10 off</p>
+        </div>
+
+        <div class="cart-items" id="cartItems">
+            <p style="text-align: center; color: #666; padding: 2rem;">Your cart is empty</p>
+        </div>
+
+        <div class="cart-total">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                <span>Subtotal:</span>
+                <span id="cartSubtotal">$0.00</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: #4ecca3;">
+                <span>Loyalty Discount:</span>
+                <span id="loyaltyDiscount">-$0.00</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 1.3rem; font-weight: bold; margin-top: 1rem; padding-top: 1rem; border-top: 2px solid #ddd;">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="btn" style="width: 100%; margin-top: 1rem;" onclick="showPage('checkout'); toggleCart();">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Welcome to Luxottica</h2>
+                <button class="close-modal" onclick="closeAuthModal()">×</button>
+            </div>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchAuthTab('signin')">Sign In</button>
+                <button class="auth-tab" onclick="switchAuthTab('signup')">Join Loyalty Program</button>
+            </div>
+
+            <!-- Sign In Form -->
+            <div class="auth-form active" id="signinForm">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="signinEmail" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signinPassword" placeholder="Enter your password">
+                </div>
+                <button class="btn" style="width: 100%; margin-top: 1rem;" onclick="signIn()">Sign In</button>
+                <p style="text-align: center; margin-top: 1rem; color: #666;">
+                    <a href="#" style="color: #4ecca3;">Forgot Password?</a>
+                </p>
+                <div style="background: #f0f0f0; padding: 1rem; border-radius: 8px; margin-top: 1.5rem; font-size: 0.85rem;">
+                    <strong>Demo Accounts:</strong><br>
+                    Associate: associate@luxottica.com / pass123<br>
+                    Marketing: marketing@luxottica.com / pass123<br>
+                    Admin: admin@luxottica.com / pass123
+                </div>
+            </div>
+
+            <!-- Sign Up Form -->
+            <div class="auth-form" id="signupForm">
+                <h3 style="color: #4ecca3; margin-bottom: 1rem;">💎 Join Our Loyalty Program</h3>
+                <p style="color: #666; margin-bottom: 1.5rem;">Earn 500 bonus points on signup!</p>
+                
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="signupName" placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="signupEmail" placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signupPassword" placeholder="Create a password">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="signupPhone" placeholder="(555) 123-4567">
+                </div>
+                <div class="form-group">
+                    <label>Date of Birth</label>
+                    <input type="date" id="signupDob">
+                </div>
+                <div class="form-group" style="display: flex; align-items: start; gap: 0.5rem;">
+                    <input type="checkbox" id="agreeTerms" style="width: auto; margin-top: 0.3rem;">
+                    <label for="agreeTerms" style="margin: 0;">I agree to receive promotional emails and loyalty program updates</label>
+                </div>
+                <button class="btn" style="width: 100%; margin-top: 1rem;" onclick="signUp()">Join Loyalty Program</button>
+                
+                <div style="background: #f0fff9; padding: 1rem; border-radius: 10px; margin-top: 1.5rem; border-left: 4px solid #4ecca3;">
+                    <h4 style="color: #1a1a2e; margin-bottom: 0.5rem;">Loyalty Benefits:</h4>
+                    <ul style="color: #666; padding-left: 1.2rem;">
+                        <li>500 bonus points on signup</li>
+                        <li>Earn 10 points per $1 spent</li>
+                        <li>Exclusive member discounts</li>
+                        <li>Early access to new collections</li>
+                        <li>Birthday rewards</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- HOME PAGE -->
     <div id="home" class="page active">
@@ -465,6 +984,13 @@
         <section class="section">
             <h2 class="section-title">Our Collection</h2>
             
+            <!-- Personalized Recommendations -->
+            <div class="recommendation-section">
+                <h3 style="color: #1a1a2e; margin-bottom: 0.5rem;">✨ Recommended For You</h3>
+                <p style="color: #666; margin-bottom: 1rem;">Based on your browsing history and preferences</p>
+                <div class="recommendation-grid" id="recommendationGrid"></div>
+            </div>
+
             <!-- AI Search -->
             <div class="ai-search-container">
                 <div class="ai-search-box">
@@ -638,6 +1164,85 @@
         </section>
     </div>
 
+    <!-- CHECKOUT PAGE -->
+    <div id="checkout" class="page">
+        <section class="section">
+            <h2 class="section-title">Checkout</h2>
+            
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div class="loyalty-banner" style="margin-bottom: 2rem;">
+                    <h3>💎 Your Loyalty Benefits</h3>
+                    <p><strong>Current Points: <span id="checkoutPoints">500</span></strong></p>
+                    <p>You can redeem 500 points for $5 off this order!</p>
+                    <button class="btn" style="margin-top: 0.5rem; background: white; color: #4ecca3;" onclick="applyLoyaltyDiscount()">Apply Discount</button>
+                </div>
+
+                <div class="prescription-form">
+                    <h3 style="margin-bottom: 1.5rem;">Shipping Information</h3>
+                    
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" placeholder="John Doe">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="john@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" placeholder="(555) 123-4567">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" placeholder="123 Main Street">
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" placeholder="New York">
+                        </div>
+                        <div class="form-group">
+                            <label>State</label>
+                            <input type="text" placeholder="NY">
+                        </div>
+                        <div class="form-group">
+                            <label>ZIP</label>
+                            <input type="text" placeholder="10001">
+                        </div>
+                    </div>
+
+                    <h3 style="margin: 2rem 0 1.5rem;">Payment Information</h3>
+
+                    <div class="form-group">
+                        <label>Card Number</label>
+                        <input type="text" placeholder="1234 5678 9012 3456">
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                        <div class="form-group">
+                            <label>Expiry Date</label>
+                            <input type="text" placeholder="MM/YY">
+                        </div>
+                        <div class="form-group">
+                            <label>CVV</label>
+                            <input type="text" placeholder="123">
+                        </div>
+                    </div>
+
+                    <div class="cart-total" style="margin-top: 2rem;">
+                        <h3 style="margin-bottom: 1rem;">Order Summary</h3>
+                        <div id="checkoutSummary"></div>
+                        <button class="btn" style="width: 100%; margin-top: 1rem;" onclick="completeOrder()">Complete Order</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
     <!-- STORE LOCATOR PAGE -->
     <div id="stores" class="page">
         <section class="section">
@@ -704,6 +1309,167 @@
                 </div>
             </div>
         </section>
+    </div>
+
+    <!-- ADMIN/BACKEND PAGE -->
+    <div id="admin" class="page">
+        <div class="admin-panel">
+            <div class="admin-header">
+                <h1>Luxottica Backend System</h1>
+                <p>Role: <span class="role-badge" id="userRole">CUSTOMER</span></p>
+            </div>
+
+            <div class="admin-nav">
+                <button class="admin-nav-btn active" onclick="showAdminSection('dashboard')">Dashboard</button>
+                <button class="admin-nav-btn" onclick="showAdminSection('inventory')" id="inventoryTab">Inventory</button>
+                <button class="admin-nav-btn" onclick="showAdminSection('appointments')" id="appointmentsTab">Appointments</button>
+                <button class="admin-nav-btn" onclick="showAdminSection('catalog')" id="catalogTab">Catalog Management</button>
+            </div>
+
+            <div class="admin-content">
+                <!-- Dashboard Section -->
+                <div id="dashboardSection" class="admin-section">
+                    <h2 style="margin-bottom: 1.5rem;">Dashboard Overview</h2>
+                    
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <h3>📦 Total Products</h3>
+                            <div class="stat-number" id="totalProducts">12</div>
+                            <p style="color: #666;">In catalog</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <h3>📅 Today's Appointments</h3>
+                            <div class="stat-number" id="todayAppointments">5</div>
+                            <p style="color: #666;">Scheduled exams</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <h3>⚠️ Low Stock Items</h3>
+                            <div class="stat-number" id="lowStockCount">3</div>
+                            <p style="color: #666;">Need reordering</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <h3>👥 Active Members</h3>
+                            <div class="stat-number">1,247</div>
+                            <p style="color: #666;">Loyalty program</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inventory Section -->
+                <div id="inventorySection" class="admin-section" style="display: none;">
+                    <h2 style="margin-bottom: 1.5rem;">Inventory Management</h2>
+                    
+                    <div class="table-container">
+                        <h3 style="margin-bottom: 1rem;">Stock Levels</h3>
+                        <table id="inventoryTable">
+                            <thead>
+                                <tr>
+                                    <th>Product ID</th>
+                                    <th>Brand</th>
+                                    <th>Model</th>
+                                    <th>Stock Qty</th>
+                                    <th>Status</th>
+                                    <th>Location</th>
+                                    <th>Last Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inventoryTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Appointments Section -->
+                <div id="appointmentsSection" class="admin-section" style="display: none;">
+                    <h2 style="margin-bottom: 1.5rem;">Eye Exam Appointments</h2>
+                    
+                    <div class="table-container">
+                        <h3 style="margin-bottom: 1rem;">Upcoming Appointments</h3>
+                        <table id="appointmentsTable">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Patient Name</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Store Location</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="appointmentsTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Catalog Management Section -->
+                <div id="catalogSection" class="admin-section" style="display: none;">
+                    <h2 style="margin-bottom: 1.5rem;">Catalog Management</h2>
+                    
+                    <button class="btn-add" onclick="showAddProductForm()">+ Add New Product</button>
+                    
+                    <div id="addProductForm" style="display: none; margin-bottom: 2rem;">
+                        <div class="table-container">
+                            <h3 style="margin-bottom: 1rem;">Add New Product</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Brand</label>
+                                    <input type="text" id="newBrand" placeholder="Ray-Ban">
+                                </div>
+                                <div class="form-group">
+                                    <label>Model Title</label>
+                                    <input type="text" id="newTitle" placeholder="Aviator Classic">
+                                </div>
+                                <div class="form-group">
+                                    <label>Type</label>
+                                    <select id="newType">
+                                        <option>sports</option>
+                                        <option>casual</option>
+                                        <option>senior</option>
+                                        <option>youth</option>
+                                        <option>trendy</option>
+                                        <option>elegant</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Price ($)</label>
+                                    <input type="number" id="newPrice" placeholder="189">
+                                </div>
+                                <div class="form-group">
+                                    <label>Image URL</label>
+                                    <input type="text" id="newImage" placeholder="https://...">
+                                </div>
+                                <div class="form-group">
+                                    <label>Keywords</label>
+                                    <input type="text" id="newKeywords" placeholder="casual everyday classic">
+                                </div>
+                            </div>
+                            <button class="btn" onclick="addNewProduct()">Save Product</button>
+                            <button class="btn" style="background: #666; margin-left: 1rem;" onclick="cancelAddProduct()">Cancel</button>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <h3 style="margin-bottom: 1rem;">Current Products</h3>
+                        <table id="catalogTable">
+                            <thead>
+                                <tr>
+                                    <th>Brand</th>
+                                    <th>Model</th>
+                                    <th>Type</th>
+                                    <th>Price</th>
+                                    <th>Keywords</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="catalogTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <footer>
@@ -811,6 +1577,410 @@
             }
         ];
 
+        // Cart System
+        let cart = [];
+        let loyaltyPoints = 500;
+        let loyaltyDiscountApplied = false;
+        let currentUser = null;
+
+        // Backend data
+        const inventory = [
+            { id: 'LUX001', brand: 'Ray-Ban', model: 'Aviator Classic', stock: 45, status: 'In Stock', location: 'NY Downtown', updated: '2024-11-20' },
+            { id: 'LUX002', brand: 'Oakley', model: 'Holbrook Sport', stock: 8, status: 'Low Stock', location: 'LA Westfield', updated: '2024-11-22' },
+            { id: 'LUX003', brand: 'Prada', model: 'PR 01VS Elegant', stock: 23, status: 'In Stock', location: 'Chicago Mile', updated: '2024-11-21' },
+            { id: 'LUX004', brand: 'Versace', model: 'VE2150Q Trendy', stock: 5, status: 'Low Stock', location: 'Miami Waterfront', updated: '2024-11-23' },
+            { id: 'LUX005', brand: 'Persol', model: 'PO3019S Senior', stock: 32, status: 'In Stock', location: 'Boston Commons', updated: '2024-11-19' },
+            { id: 'LUX006', brand: 'Burberry', model: 'BE4216 Elegant', stock: 3, status: 'Low Stock', location: 'Seattle Center', updated: '2024-11-24' }
+        ];
+
+        const appointments = [
+            { date: '2024-11-25', time: '10:00 AM', name: 'Sarah Johnson', phone: '(555) 123-4567', email: 'sarah.j@email.com', location: 'NY Downtown', status: 'Confirmed' },
+            { date: '2024-11-25', time: '11:30 AM', name: 'Michael Chen', phone: '(555) 234-5678', email: 'mchen@email.com', location: 'NY Downtown', status: 'Confirmed' },
+            { date: '2024-11-25', time: '2:00 PM', name: 'Emily Davis', phone: '(555) 345-6789', email: 'emily.d@email.com', location: 'LA Westfield', status: 'Pending' },
+            { date: '2024-11-26', time: '9:00 AM', name: 'Robert Smith', phone: '(555) 456-7890', email: 'rsmith@email.com', location: 'Chicago Mile', status: 'Confirmed' },
+            { date: '2024-11-26', time: '3:00 PM', name: 'Lisa Brown', phone: '(555) 567-8901', email: 'lisa.b@email.com', location: 'Miami Waterfront', status: 'Confirmed' }
+        ];
+
+        // Role-based access
+        const userRoles = {
+            'associate@luxottica.com': 'Store Associate',
+            'marketing@luxottica.com': 'Marketing',
+            'admin@luxottica.com': 'Administrator'
+        };
+
+        const rolePermissions = {
+            'Store Associate': ['dashboard', 'inventory', 'appointments'],
+            'Marketing': ['dashboard', 'catalog'],
+            'Administrator': ['dashboard', 'inventory', 'appointments', 'catalog']
+        };
+
+        // Auth Functions
+        function openAuthModal() {
+            if (currentUser) {
+                if (confirm(`Signed in as ${currentUser.name}\n\nWould you like to sign out?`)) {
+                    signOut();
+                }
+            } else {
+                document.getElementById('authModal').classList.add('active');
+            }
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.remove('active');
+        }
+
+        function switchAuthTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            
+            if (tab === 'signin') {
+                document.querySelectorAll('.auth-tab')[0].classList.add('active');
+                document.getElementById('signinForm').classList.add('active');
+            } else {
+                document.querySelectorAll('.auth-tab')[1].classList.add('active');
+                document.getElementById('signupForm').classList.add('active');
+            }
+        }
+
+        function signIn() {
+            const email = document.getElementById('signinEmail').value;
+            const password = document.getElementById('signinPassword').value;
+            
+            if (!email || !password) {
+                showNotification('Please fill in all fields');
+                return;
+            }
+            
+            const role = userRoles[email] || 'Customer';
+            
+            currentUser = {
+                name: email.split('@')[0],
+                email: email,
+                points: loyaltyPoints,
+                role: role
+            };
+            
+            const badge = role !== 'Customer' ? `<span class="member-badge">${role.toUpperCase()}</span>` : '<span class="member-badge">MEMBER</span>';
+            document.getElementById('userIcon').innerHTML = '👤' + badge;
+            
+            // Show admin link if has backend access
+            if (role !== 'Customer') {
+                document.getElementById('adminLink').style.display = 'block';
+                document.getElementById('userRole').textContent = role.toUpperCase();
+            }
+            
+            closeAuthModal();
+            showNotification(`Welcome back, ${currentUser.name}!`);
+        }
+
+        function signUp() {
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const phone = document.getElementById('signupPhone').value;
+            const agreeTerms = document.getElementById('agreeTerms').checked;
+            
+            if (!name || !email || !password || !phone) {
+                showNotification('Please fill in all required fields');
+                return;
+            }
+            
+            if (!agreeTerms) {
+                showNotification('Please agree to receive loyalty program updates');
+                return;
+            }
+            
+            loyaltyPoints += 500; // Bonus points
+            currentUser = {
+                name: name,
+                email: email,
+                points: loyaltyPoints
+            };
+            
+            document.getElementById('userIcon').innerHTML = '👤<span class="member-badge">MEMBER</span>';
+            document.getElementById('loyaltyPoints').textContent = loyaltyPoints;
+            closeAuthModal();
+            showNotification(`Welcome ${name}! You earned 500 bonus points!`);
+        }
+
+        function signOut() {
+            currentUser = null;
+            document.getElementById('userIcon').innerHTML = '👤';
+            document.getElementById('adminLink').style.display = 'none';
+            showNotification('Signed out successfully');
+        }
+
+        // Admin/Backend Functions
+        function showAdminSection(section) {
+            if (!currentUser || currentUser.role === 'Customer') {
+                showNotification('Access denied. Please sign in with a staff account.');
+                return;
+            }
+
+            const permissions = rolePermissions[currentUser.role] || [];
+            if (!permissions.includes(section)) {
+                showNotification('You do not have permission to access this section.');
+                return;
+            }
+
+            document.querySelectorAll('.admin-nav-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.admin-section').forEach(sec => sec.style.display = 'none');
+
+            event.target.classList.add('active');
+            document.getElementById(section + 'Section').style.display = 'block';
+
+            if (section === 'inventory') loadInventory();
+            if (section === 'appointments') loadAppointments();
+            if (section === 'catalog') loadCatalog();
+        }
+
+        function loadInventory() {
+            const tbody = document.getElementById('inventoryTableBody');
+            tbody.innerHTML = inventory.map(item => `
+                <tr>
+                    <td>${item.id}</td>
+                    <td>${item.brand}</td>
+                    <td>${item.model}</td>
+                    <td><strong>${item.stock}</strong></td>
+                    <td><span class="status-badge ${item.status === 'Low Stock' ? 'status-low' : 'status-in-stock'}">${item.status}</span></td>
+                    <td>${item.location}</td>
+                    <td>${item.updated}</td>
+                </tr>
+            `).join('');
+        }
+
+        function loadAppointments() {
+            const tbody = document.getElementById('appointmentsTableBody');
+            tbody.innerHTML = appointments.map(apt => `
+                <tr>
+                    <td>${apt.date}</td>
+                    <td>${apt.time}</td>
+                    <td>${apt.name}</td>
+                    <td>${apt.phone}</td>
+                    <td>${apt.email}</td>
+                    <td>${apt.location}</td>
+                    <td><span class="status-badge ${apt.status === 'Confirmed' ? 'status-confirmed' : 'status-pending'}">${apt.status}</span></td>
+                    <td>
+                        <button class="action-btn btn-edit" onclick="showNotification('Appointment updated')">Update</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function loadCatalog() {
+            const tbody = document.getElementById('catalogTableBody');
+            tbody.innerHTML = products.map((product, index) => `
+                <tr>
+                    <td>${product.brand}</td>
+                    <td>${product.title}</td>
+                    <td>${product.type}</td>
+                    <td>${product.price}</td>
+                    <td>${product.keywords}</td>
+                    <td>
+                        <button class="action-btn btn-edit" onclick="editProduct(${index})">Edit</button>
+                        <button class="action-btn btn-delete" onclick="deleteProduct(${index})">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function showAddProductForm() {
+            document.getElementById('addProductForm').style.display = 'block';
+        }
+
+        function cancelAddProduct() {
+            document.getElementById('addProductForm').style.display = 'none';
+        }
+
+        function addNewProduct() {
+            const newProduct = {
+                brand: document.getElementById('newBrand').value,
+                title: document.getElementById('newTitle').value,
+                type: document.getElementById('newType').value,
+                price: parseInt(document.getElementById('newPrice').value),
+                image: document.getElementById('newImage').value,
+                keywords: document.getElementById('newKeywords').value
+            };
+
+            if (!newProduct.brand || !newProduct.title || !newProduct.price) {
+                showNotification('Please fill in all required fields');
+                return;
+            }
+
+            products.push(newProduct);
+            loadCatalog();
+            cancelAddProduct();
+            showNotification('Product added successfully!');
+            
+            // Clear form
+            document.getElementById('newBrand').value = '';
+            document.getElementById('newTitle').value = '';
+            document.getElementById('newPrice').value = '';
+            document.getElementById('newImage').value = '';
+            document.getElementById('newKeywords').value = '';
+        }
+
+        function editProduct(index) {
+            const product = products[index];
+            const newPrice = prompt(`Edit price for ${product.brand} ${product.title}:`, product.price);
+            if (newPrice !== null) {
+                products[index].price = parseInt(newPrice);
+                loadCatalog();
+                showNotification('Product updated successfully!');
+            }
+        }
+
+        function deleteProduct(index) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                products.splice(index, 1);
+                loadCatalog();
+                showNotification('Product deleted successfully!');
+            }
+        }
+
+        function updateRoleBasedUI() {
+            if (!currentUser || currentUser.role === 'Customer') {
+                document.getElementById('inventoryTab').style.display = 'none';
+                document.getElementById('appointmentsTab').style.display = 'none';
+                document.getElementById('catalogTab').style.display = 'none';
+                return;
+            }
+
+            const permissions = rolePermissions[currentUser.role] || [];
+            document.getElementById('inventoryTab').style.display = permissions.includes('inventory') ? 'block' : 'none';
+            document.getElementById('appointmentsTab').style.display = permissions.includes('appointments') ? 'block' : 'none';
+            document.getElementById('catalogTab').style.display = permissions.includes('catalog') ? 'block' : 'none';
+        }
+
+        function addToCart(productIndex) {
+            const product = products[productIndex];
+            cart.push({...product, id: Date.now()});
+            updateCart();
+            showNotification('Added to cart!');
+        }
+
+        function removeFromCart(itemId) {
+            cart = cart.filter(item => item.id !== itemId);
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            const cartSubtotal = document.getElementById('cartSubtotal');
+            const cartTotal = document.getElementById('cartTotal');
+            const loyaltyDiscount = document.getElementById('loyaltyDiscount');
+
+            cartCount.textContent = cart.length;
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">Your cart is empty</p>';
+                cartSubtotal.textContent = '$0.00';
+                cartTotal.textContent = '$0.00';
+                loyaltyDiscount.textContent = '-$0.00';
+                return;
+            }
+
+            cartItems.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <img src="${item.image}" class="cart-item-image" alt="${item.title}">
+                    <div class="cart-item-details">
+                        <h4 style="margin-bottom: 0.5rem;">${item.brand} ${item.title}</h4>
+                        <p style="color: #4ecca3; font-weight: bold;">${item.price}</p>
+                    </div>
+                    <button onclick="removeFromCart(${item.id})" style="border: none; background: none; font-size: 1.2rem; cursor: pointer; color: #999;">✕</button>
+                </div>
+            `).join('');
+
+            const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+            const discount = loyaltyDiscountApplied ? Math.min(subtotal * 0.1, loyaltyPoints / 100) : 0;
+            const total = subtotal - discount;
+
+            cartSubtotal.textContent = `${subtotal.toFixed(2)}`;
+            loyaltyDiscount.textContent = `-${discount.toFixed(2)}`;
+            cartTotal.textContent = `${total.toFixed(2)}`;
+
+            updateCheckoutSummary(subtotal, discount, total);
+        }
+
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('open');
+        }
+
+        function applyLoyaltyDiscount() {
+            if (loyaltyPoints >= 500) {
+                loyaltyDiscountApplied = true;
+                updateCart();
+                showNotification('Loyalty discount applied!');
+            } else {
+                showNotification('Not enough points');
+            }
+        }
+
+        function updateCheckoutSummary(subtotal, discount, total) {
+            const summary = document.getElementById('checkoutSummary');
+            if (summary) {
+                summary.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>Subtotal:</span>
+                        <span>${subtotal.toFixed(2)}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: #4ecca3;">
+                        <span>Loyalty Discount:</span>
+                        <span>-${discount.toFixed(2)}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 1.3rem; font-weight: bold; margin-top: 1rem; padding-top: 1rem; border-top: 2px solid #ddd;">
+                        <span>Total:</span>
+                        <span>${total.toFixed(2)}</span>
+                    </div>
+                `;
+            }
+        }
+
+        function completeOrder() {
+            if (cart.length === 0) {
+                showNotification('Your cart is empty!');
+                return;
+            }
+            
+            const earnedPoints = Math.floor(cart.reduce((sum, item) => sum + item.price, 0) * 10);
+            loyaltyPoints += earnedPoints;
+            document.getElementById('loyaltyPoints').textContent = loyaltyPoints;
+            document.getElementById('checkoutPoints').textContent = loyaltyPoints;
+            
+            showNotification(`Order completed! You earned ${earnedPoints} loyalty points!`);
+            cart = [];
+            loyaltyDiscountApplied = false;
+            updateCart();
+            
+            setTimeout(() => {
+                showPage('home');
+            }, 2000);
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = 'position: fixed; top: 100px; right: 20px; background: #4ecca3; color: white; padding: 1rem 2rem; border-radius: 50px; z-index: 3000; box-shadow: 0 5px 15px rgba(0,0,0,0.2);';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+        }
+
+        // Personalized Recommendations
+        function showRecommendations() {
+            const grid = document.getElementById('recommendationGrid');
+            const recommended = products.slice(0, 4); // Simple logic: show first 4 products
+            
+            grid.innerHTML = recommended.map((product, index) => `
+                <div class="recommendation-card">
+                    <img src="${product.image}" alt="${product.title}">
+                    <h4 style="font-size: 0.9rem; margin-bottom: 0.5rem;">${product.brand}</h4>
+                    <p style="color: #4ecca3; font-weight: bold;">${product.price}</p>
+                    <button class="btn" style="padding: 0.5rem 1rem; font-size: 0.85rem; margin-top: 0.5rem;" onclick="addToCart(${index})">Add to Cart</button>
+                </div>
+            `).join('');
+        }
+
         // Page Navigation
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => {
@@ -818,6 +1988,10 @@
             });
             document.getElementById(pageId).classList.add('active');
             window.scrollTo(0, 0);
+
+            if (pageId === 'admin') {
+                updateRoleBasedUI();
+            }
         }
 
         // AI Search Functionality
@@ -912,6 +2086,13 @@
 
             // Initialize products on catalog page
             renderProducts();
+            showRecommendations();
+            
+            // Update loyalty points display
+            document.getElementById('loyaltyPoints').textContent = loyaltyPoints;
+            if (document.getElementById('checkoutPoints')) {
+                document.getElementById('checkoutPoints').textContent = loyaltyPoints;
+            }
         });
     </script>
 </body>
